@@ -1,12 +1,12 @@
 // store source URL
 const url = 'https://static.bc-edx.com/data/dl-1-2/m14/lms/starter/samples.json';
 
-// fetch the JSON data and log it
+// Get the samples field
 d3.json(url).then(function(data){
     console.log(data);
 }); 
 
-//create init function that will populate the dropdown, bar chart, and bubble chart with each sample's dataset
+//create the initial function that will populate the dropdown, bar chart, and bubble chart with data for each sample
 function init(){
     //create the dropdown list variable for all sample id's in the dataset by appending each ID as a new value
     let dropdown = d3.select("#selDataset");
@@ -26,21 +26,22 @@ function init(){
     makeBar(first_entry);
     makeBubble(first_entry);
     makeDemographics(first_entry);
-    }); //end of d3 access
+    }); //clear d3
 };
 
-//create a function to populate the horizontal bar chart graph
+//create a function to populate the bar chart 
 function makeBar(sample){
 
-    //access the sample data for populating the bar chart
+    //Building the bar chart
     d3.json(url).then((data) => {
         let sample_data = data.samples;
         //apply a filter that matches based on sample id
         let results = sample_data.filter(id => id.id == sample);
-        //access and store the first entry in results filter
+        //get the first entry in 'results' filter
         let first_result = results[0];
         console.log(first_result);
-        //store the first 10 results to display in the bar chart
+        //get the first 10 results to display in the bar chart
+        // Remember to slice the data
         let sample_values = first_result.sample_values.slice(0,10);
         let otu_ids = first_result.otu_ids.slice(0,10);
         let otu_labels = first_result.otu_labels.slice(0,10);
@@ -48,7 +49,8 @@ function makeBar(sample){
         console.log(otu_ids);
         console.log(otu_labels);
 
-        //create the trace for bar chart
+        //Render the Bar Chart
+        // Don't forget to reverse the data
         let bar_trace = {
             x: sample_values.reverse(),
             y: otu_ids.map(item => `OTU ${item}`).reverse(),
@@ -57,21 +59,24 @@ function makeBar(sample){
             orientation: 'h'
         };
 
-        let layout = {title: "Top Ten OTUs"};
+        let layout = {
+            title: "Top Ten Bacteria Cultures Found",
+            xaxis: {title:'Number of Bacteria'}
+          };       
         Plotly.newPlot("bar", [bar_trace], layout);
     });
 };
 
 function makeBubble(sample){
-    //access the sample data for populating the bubble chart
+    // Build the Bubble Chart
     d3.json(url).then((data) => {
         let sample_data = data.samples;
-        //apply a filter that matches based on sample id
+        //apply filter that matches based on sample id
         let results = sample_data.filter(id => id.id == sample);
-        //access and store the first entry in results filter
+        //get the first entry in results filter
         let first_result = results[0];
         console.log(first_result);
-        //store the results to display in the bubble chart
+        //get results to display in the bubble chart
         let sample_values = first_result.sample_values;
         let otu_ids = first_result.otu_ids;
         let otu_labels = first_result.otu_labels;
@@ -79,7 +84,7 @@ function makeBubble(sample){
         console.log(otu_ids);
         console.log(otu_labels);
 
-        //create the trace for bubble chart
+        //Trace for the Bubble chart
         let bubble_trace = {
             x: otu_ids.reverse(),
             y: sample_values.reverse(),
@@ -90,28 +95,28 @@ function makeBubble(sample){
                 color: otu_ids,
             }
         };
-
+// Render the Bubble Chart
         let layout = {
-            title: "Bacteria Count for each Sample ID",
+            title: "Bacteria Cultures per Sample",
             xaxis: {title: 'OTU ID'},
             yaxis: {title: 'Number of Bacteria'}
         };
-        Plotly.newPlot("bubble", [bubble_trace], layout); //'bubble' is the html tag in index.html
+        Plotly.newPlot("bubble", [bubble_trace], layout); 
     });
 };
 
-//create the demographic info function to populate each sample's info
+//Demographic/metadata info function
 function makeDemographics(sample){
-    //access the sample data for populating the demographics section
+    //get the sample data for populating the demographics section
     d3.json(url).then((data) => {
-    //access the demographic info (metadata) with d3
+    //access the metadata with d3
     let demographic_info = data.metadata;
-     //apply a filter that matches based on sample id
+     //filter on sample ID
     let results = demographic_info.filter(id => id.id == sample);
     //store the first result to display in demographic info
     let first_result = results[0];
     console.log(first_result);
-    //this is used to clear out previous entries in the demographic info section by setting the text to a blank string
+    // Clear out any previous selections
     d3.select('#sample-metadata').text('');
 
     Object.entries(first_result).forEach(([key,value]) => {
