@@ -21,8 +21,9 @@ Loop through each key-value pair from the metadata JSON object and create a text
 Append an html tag with that text to the #sample-metadata panel.
 
 
-Main code located in the starter_code/static/js subfolder
-html code located in starter_code folder
+All code and pertinent files located in main directory so Pages will be able to see and deploy.
+
+Code is deployed using github Pages : https://paul-anderson2.github.io/belly-button-challenge/
 
 StackOverflow had useful examples for d3.select and html clearing and helped me get started            
 creating the filter solution for filtering the sample id's
