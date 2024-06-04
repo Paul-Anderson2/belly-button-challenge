@@ -24,3 +24,6 @@ Append an html tag with that text to the #sample-metadata panel.
 Main code located in the stater_code/static/js subfolder
 html code located in start_code folder
 
+StackOverflow had useful examples for d3.select and html clearing and helped mne get started            
+creating the fileter solution for filtering the sample id's
+
