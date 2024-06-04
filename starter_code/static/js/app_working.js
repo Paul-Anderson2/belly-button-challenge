@@ -1,7 +1,7 @@
 // store source URL, keep it constant to avoid haveing to re-enter it for each section
 const url = 'https://static.bc-edx.com/data/dl-1-2/m14/lms/starter/samples.json';
 
-// Get the samples field
+// Get the metadata field
 d3.json(url).then(function(data){
     console.log(data);
 }); 
@@ -120,6 +120,7 @@ function makeDemographics(sample){
     let first_result = results[0];
     console.log(first_result);
     // Clear out any previous selections
+    
     d3.select('#sample-metadata').text('');
 
     Object.entries(first_result).forEach(([key,value]) => {
