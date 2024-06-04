@@ -20,3 +20,7 @@ Display the sample's metadata, i.e., an individual's demographic information.
 Loop through each key-value pair from the metadata JSON object and create a text string.
 Append an html tag with that text to the #sample-metadata panel.
 
+
+Main code located in the stater_code/static/js subfolder
+html code located in start_code folder
+
