@@ -1,5 +1,5 @@
 // store source URL
-const url = 'https://2u-data-curriculum-team.s3.amazonaws.com/dataviz-classroom/v1.1/14-Interactive-Web-Visualizations/02-Homework/samples.json';
+const url = 'https://static.bc-edx.com/data/dl-1-2/m14/lms/starter/samples.json';
 
 // fetch the JSON data and log it
 d3.json(url).then(function(data){
