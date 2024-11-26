@@ -26,5 +26,5 @@ All code and pertinent files located in main directory so Pages will be able to 
 Code is deployed using github Pages : https://paul-anderson2.github.io/belly-button-challenge/
 
 StackOverflow had useful examples for d3.select and html clearing and helped me get started            
-creating the filter solution for filtering the sample id's
+creating the filter solution for filtering the sample id's 
 
